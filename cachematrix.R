@@ -35,16 +35,15 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Solves for inverse matrices, using caching to avoid duplication of processing
 ##      effort
 ## First checks to see if an inverse for a matrix has been cached; if so, 
-##      returns from makeCacheMatrix
+##      explicitly returns from makeCacheMatrix to avoid recalculation
 ## If no cache found, solves for the inverse of the matrix stored in a list 
 ##      created by makeCacheMatrix, and caches it in makeCacheMatrix object
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
         i <- x$getinverse()
         if(!is.null(i)) {
                 message("getting cached data")
-                i
+                return(i)
         }
         matrix <- x$get()
         inverse <- solve(matrix)
